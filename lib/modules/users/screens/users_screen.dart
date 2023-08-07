@@ -99,17 +99,20 @@ class UsersScreen extends ConsumerWidget {
       body: users.isRefreshing
           ? const Center(child: CircularProgressIndicator())
           : users.when(
-              data: (data) => ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    final User user = data[index];
-                    return UserSlidableCard(
-                        user: user,
-                        openUpdateUserBottomSheet: openUpdateUserBottomSheet,
-                        openDeleteConfirmationalDialog:
-                            openDeleteConfirmationalDialog,
-                        handleStatusChange: handleStatusChange);
-                  }),
+              data: (data) => RefreshIndicator(
+                onRefresh: () => ref.refresh(getUsersProvider.future),
+                child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      final User user = data[index];
+                      return UserSlidableCard(
+                          user: user,
+                          openUpdateUserBottomSheet: openUpdateUserBottomSheet,
+                          openDeleteConfirmationalDialog:
+                              openDeleteConfirmationalDialog,
+                          handleStatusChange: handleStatusChange);
+                    }),
+              ),
               error: (e, s) => Text(e.toString() + s.toString()),
               loading: () => const Center(child: CircularProgressIndicator()),
             ),
