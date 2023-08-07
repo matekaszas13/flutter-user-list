@@ -25,32 +25,32 @@ class UserSlidableCard extends ConsumerWidget {
     final formattedDate =
         DateFormat('yyyy/MM/dd HH:mm').format(user.createdAt.toLocal());
 
-    return Card(
-      child: Slidable(
-        key: ValueKey(user.id),
-        endActionPane: ActionPane(
-            motion: const DrawerMotion(),
-            dragDismissible: false,
-            children: [
-              SlidableAction(
-                onPressed: (context) => openUpdateUserBottomSheet(
-                    context, user.firstName, user.lastName, user.id, true),
-                backgroundColor: const Color.fromARGB(100, 92, 70, 156),
-                foregroundColor: Colors.white,
-                icon: Icons.edit,
-                label: 'Edit',
-                flex: 1,
-              ),
-              SlidableAction(
-                onPressed: (context) => openDeleteConfirmationalDialog(
-                    context, user.id, user.fullName),
-                backgroundColor: const Color.fromARGB(231, 214, 54, 54),
-                foregroundColor: Colors.white,
-                icon: Icons.delete,
-                label: 'Delete',
-                flex: 1,
-              ),
-            ]),
+    return Slidable(
+      key: ValueKey(user.id),
+      endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          dragDismissible: false,
+          children: [
+            SlidableAction(
+              onPressed: (context) => openUpdateUserBottomSheet(
+                  context, user.firstName, user.lastName, user.id, true),
+              backgroundColor: const Color.fromARGB(100, 92, 70, 156),
+              foregroundColor: Colors.white,
+              icon: Icons.edit,
+              label: 'Edit',
+              flex: 1,
+            ),
+            SlidableAction(
+              onPressed: (context) => openDeleteConfirmationalDialog(
+                  context, user.id, user.fullName),
+              backgroundColor: const Color.fromARGB(231, 214, 54, 54),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+              flex: 1,
+            ),
+          ]),
+      child: Card(
         child: ListTile(
           title: Text(user.fullName),
           subtitle: Text(formattedDate),
