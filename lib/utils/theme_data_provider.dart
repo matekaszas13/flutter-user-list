@@ -47,7 +47,6 @@ class CustomTheme {
         color: isDarkTheme
             ? const Color.fromARGB(100, 29, 38, 125)
             : const Color.fromARGB(255, 229, 224, 255),
-        margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       ),
       dialogTheme: DialogTheme(
         backgroundColor: isDarkTheme

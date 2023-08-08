@@ -30,7 +30,7 @@ class UsersRepository {
   Future<Response<dynamic>> updateUserStatusById(
       UserStatusUpdateParams params) async {
     final response = await dio.put('/users/${params.id}.json', data: {
-      'status': params.status.name,
+      'status': params.status.status,
     });
     return response;
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
-import 'package:flutter_user_list/utils/mutation_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConfirmationalDialog extends StatelessWidget {
@@ -18,7 +17,7 @@ class ConfirmationalDialog extends StatelessWidget {
   Widget build(context) {
     return Consumer(
       builder: (context, ref, _) {
-        final isLoading = ref.watch(deleteUserMutation.isLoading);
+        final isLoading = ref.watch(deleteUserMutation).isLoading;
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: Container(

@@ -27,15 +27,14 @@ class UsersScreen extends ConsumerWidget {
         id: user.id,
         status: user.status == Status.active ? Status.locked : Status.active,
       );
-      final response =
-          await ref.read(updateUserStatusMutation.notifier).mutate(params);
+      final response = await ref.read(updateUserStatusMutation).mutate(params);
       if (response.hasError) {
         Snackbar.show(context, response.error.toString(), Colors.red);
       }
     }
 
     Future handleUserDelete(BuildContext context, int id) async {
-      final response = await ref.read(deleteUserMutation.notifier).mutate(id);
+      final response = await ref.read(deleteUserMutation).mutate(id);
       if (response.hasError) {
         Snackbar.show(context, response.error.toString(), Colors.red);
       } else {
