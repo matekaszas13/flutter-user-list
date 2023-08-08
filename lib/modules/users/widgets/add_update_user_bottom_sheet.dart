@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_user_list/modules/dto/update_user_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
-import 'package:flutter_user_list/utils/mutation_provider.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../dto/add_new_user_params.dart';
@@ -29,7 +28,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
     final isDarkMode = ref.watch(themeModeValueProvider);
 
     final formKey = useState(GlobalKey<FormState>());
-    final mutationIsLoading = ref.watch(addNewUserMutation.isLoading);
+    final mutationIsLoading = ref.watch(addNewUserMutation).isLoading;
 
     Future onSubmit() async {
       final AsyncValue<dynamic> response;
@@ -42,14 +41,14 @@ class AddUserBottomSheet extends HookConsumerWidget {
           lastName: formValues.value['lastName']!,
         );
 
-        response = await ref.read(updateUserMutation.notifier).mutate(params);
+        response = await ref.read(updateUserMutation).mutate(params);
       } else {
         final params = AddNewUserParams(
           firstName: formValues.value['firstName']!,
           lastName: formValues.value['lastName']!,
         );
 
-        response = await ref.read(addNewUserMutation.notifier).mutate(params);
+        response = await ref.read(addNewUserMutation).mutate(params);
       }
       if (response.hasError) {
         Snackbar.show(context, response.error.toString(), Colors.red);

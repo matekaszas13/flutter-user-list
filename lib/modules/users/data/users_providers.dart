@@ -13,29 +13,26 @@ Future<List<User>> getUsers(GetUsersRef ref) async {
   return ref.watch(usersRepositoryProvider).getUsers();
 }
 
-final updateUserStatusMutation = MutationStateNotifierProvider(
-  (ref) => MutationProvider<dynamic, UserStatusUpdateParams>(
-    mutationFn: ref.read(usersRepositoryProvider).updateUserStatusById,
-    onSuccess: (_, __) => ref.invalidate(getUsersProvider),
-  ),
+final updateUserStatusMutation = MutationProvider.create(
+  mutationFn: (ref, UserStatusUpdateParams params) async =>
+      ref.read(usersRepositoryProvider).updateUserStatusById(params),
+  onSuccess: (ref, __, ___) async => ref.invalidate(getUsersProvider),
 );
 
-final deleteUserMutation = MutationStateNotifierProvider(
-  (ref) => MutationProvider<dynamic, int>(
-    mutationFn: ref.read(usersRepositoryProvider).deleteUserById,
-    onSuccess: (_, __) => ref.invalidate(getUsersProvider),
-  ),
+final deleteUserMutation = MutationProvider.create(
+  mutationFn: (ref, int params) async =>
+      ref.read(usersRepositoryProvider).deleteUserById(params),
+  onSuccess: (ref, __, ___) async => ref.invalidate(getUsersProvider),
 );
 
-final addNewUserMutation = MutationStateNotifierProvider(
-  (ref) => MutationProvider<dynamic, AddNewUserParams>(
-    mutationFn: ref.read(usersRepositoryProvider).addNewUser,
-    onSuccess: (_, __) => ref.invalidate(getUsersProvider),
-  ),
+final addNewUserMutation = MutationProvider.create(
+  mutationFn: (ref, AddNewUserParams params) async =>
+      ref.read(usersRepositoryProvider).addNewUser(params),
+  onSuccess: (ref, __, ___) async => ref.invalidate(getUsersProvider),
 );
 
-final updateUserMutation = MutationStateNotifierProvider(
-    (ref) => MutationProvider<dynamic, UpdateUserParams>(
-          mutationFn: ref.read(usersRepositoryProvider).updateUser,
-          onSuccess: (_, __) => ref.invalidate(getUsersProvider),
-        ));
+final updateUserMutation = MutationProvider.create(
+  mutationFn: (ref, UpdateUserParams params) async =>
+      ref.read(usersRepositoryProvider).updateUser(params),
+  onSuccess: (ref, __, ___) async => ref.invalidate(getUsersProvider),
+);
