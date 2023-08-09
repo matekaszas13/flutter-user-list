@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/modules/dto/update_user_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
@@ -8,12 +9,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../dto/add_new_user_params.dart';
 
 class AddUserBottomSheet extends HookConsumerWidget {
-  const AddUserBottomSheet(
-      {this.firstName,
-      this.lastName,
-      this.userId,
-      this.isUpdate = false,
-      super.key});
+  const AddUserBottomSheet({
+    this.firstName,
+    this.lastName,
+    this.userId,
+    this.isUpdate = false,
+    super.key,
+  });
 
   final String? firstName;
   final String? lastName;
@@ -59,9 +61,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      color: isDarkMode
-          ? const Color.fromARGB(255, 92, 70, 156)
-          : const Color.fromARGB(255, 114, 134, 211),
+      color: isDarkMode ? const Color.fromARGB(255, 92, 70, 156) : const Color.fromARGB(255, 114, 134, 211),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
@@ -77,9 +77,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
                       ),
                       initialValue: formValues.value['firstName'],
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.trim().length <= 1) {
+                        if (value == null || value.isEmpty || value.trim().length <= 1) {
                           return 'Cannot be empty.';
                         }
                         return null;
@@ -99,9 +97,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
                       ),
                       initialValue: formValues.value['lastName'],
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.trim().length <= 1) {
+                        if (value == null || value.isEmpty || value.trim().length <= 1) {
                           return 'Cannot be empty.';
                         }
                         return null;
@@ -118,7 +114,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
                   onPressed: mutationIsLoading ? null : onSubmit,
                   child: mutationIsLoading
                       ? const CircularProgressIndicator()
-                      : Text(isUpdate ? 'Update User' : 'Add User')),
+                      : Text(isUpdate ? 'Update User' : context.tr('add_user'))),
             ],
           ),
         ),
