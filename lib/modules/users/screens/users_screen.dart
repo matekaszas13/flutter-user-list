@@ -17,8 +17,7 @@ class UsersScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<User>> users = ref.watch(getUsersProvider);
-    users.whenData((value) => value
-        .sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt)));
+    users.whenData((value) => value.sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt)));
 
     final isDarkMode = ref.watch(themeModeValueProvider);
 
@@ -42,8 +41,7 @@ class UsersScreen extends ConsumerWidget {
       }
     }
 
-    void openDeleteConfirmationalDialog(
-        BuildContext context, int id, String fullName) {
+    void openDeleteConfirmationalDialog(BuildContext context, int id, String fullName) {
       showDialog(
           context: context,
           builder: (context) {
@@ -64,8 +62,7 @@ class UsersScreen extends ConsumerWidget {
       );
     }
 
-    void openUpdateUserBottomSheet(BuildContext context, String firstName,
-        String lastName, int id, bool isUpdate) {
+    void openUpdateUserBottomSheet(BuildContext context, String firstName, String lastName, int id, bool isUpdate) {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
@@ -107,8 +104,7 @@ class UsersScreen extends ConsumerWidget {
                       return UserSlidableCard(
                           user: user,
                           openUpdateUserBottomSheet: openUpdateUserBottomSheet,
-                          openDeleteConfirmationalDialog:
-                              openDeleteConfirmationalDialog,
+                          openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
                           handleStatusChange: handleStatusChange);
                     }),
               ),
