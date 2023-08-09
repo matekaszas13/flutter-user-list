@@ -1,4 +1,8 @@
 {
   "edit": "Edit",
-  "add_user": "Add User"
+  "add_user": "Add User",
+  "users": "Users",
+  "update_user": "Update User",
+  "delete": "Delete",
+  "cancel": "Cancel"
 }

@@ -114,7 +114,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
                   onPressed: mutationIsLoading ? null : onSubmit,
                   child: mutationIsLoading
                       ? const CircularProgressIndicator()
-                      : Text(isUpdate ? 'Update User' : context.tr('add_user'))),
+                      : Text(context.tr(isUpdate ? 'update_user' : 'add_user'))),
             ],
           ),
         ),

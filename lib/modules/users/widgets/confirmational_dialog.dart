@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConfirmationalDialog extends StatelessWidget {
-  const ConfirmationalDialog(
-      {required this.id,
-      required this.fullName,
-      required this.handleUserDelete,
-      super.key});
+  const ConfirmationalDialog({required this.id, required this.fullName, required this.handleUserDelete, super.key});
 
   final int id;
   final String fullName;
@@ -26,17 +23,13 @@ class ConfirmationalDialog extends StatelessWidget {
               title: Text("Are you sure you want to delete $fullName?"),
               actions: [
                 TextButton(
-                  onPressed:
-                      isLoading ? null : () => handleUserDelete(context, id),
-                  child: isLoading
-                      ? const CircularProgressIndicator()
-                      : const Text('Delete'),
+                  onPressed: isLoading ? null : () => handleUserDelete(context, id),
+                  child: isLoading ? const CircularProgressIndicator() : Text(context.tr('delete')),
                 ),
                 const SizedBox(width: 16),
                 TextButton(
-                  onPressed:
-                      isLoading ? null : () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                  onPressed: isLoading ? null : () => Navigator.of(context).pop(),
+                  child: Text(context.tr('cancel')),
                 ),
               ],
             ),

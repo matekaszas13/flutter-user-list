@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/models/status.dart';
 import 'package:flutter_user_list/models/user.dart';
 import 'package:flutter_user_list/modules/dto/user_status_update_params.dart';
@@ -78,7 +79,7 @@ class UsersScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Users"),
+        title: Text(context.tr('users')),
         actions: [
           IconButton(
             onPressed: openAddUpdateUserBottomSheet,

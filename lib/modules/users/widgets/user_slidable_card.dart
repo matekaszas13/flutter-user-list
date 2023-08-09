@@ -42,7 +42,7 @@ class UserSlidableCard extends HookConsumerWidget {
             backgroundColor: const Color.fromARGB(255, 214, 54, 54),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: context.tr('delete'),
             flex: 1,
           ),
         ]),

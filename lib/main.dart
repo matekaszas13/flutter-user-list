@@ -23,7 +23,7 @@ class App extends HookConsumerWidget {
 
     final isDarkMode = ref.watch(themeModeValueProvider);
 
-    final locale = ref.watch(i18nProvider.select((locale) => locale));
+    final locale = ref.watch(i18nProvider);
 
     return MaterialApp(
       title: 'Users List',

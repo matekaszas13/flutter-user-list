@@ -1,4 +1,8 @@
 {
   "edit": "Szerkesztes",
-  "add_user": "Felhasználó hozzáadása"
+  "add_user": "Felhasználó hozzáadása",
+  "users": "Felhasználók",
+  "update_user": "Felhasználó frissítése",
+  "delete": "Törlés",
+  "cancel": "Mégse"
 }
