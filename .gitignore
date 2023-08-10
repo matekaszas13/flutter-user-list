@@ -1,3 +1,8 @@
+# Env
+config.*.json
+!config.*.enc.json
+
+
 # Miscellaneous
 *.class
 *.log
@@ -31,6 +36,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+.fvm/flutter_sdk
 
 # Symbolication related
 app.*.symbols
