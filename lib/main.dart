@@ -12,7 +12,7 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 
-class App extends HookConsumerWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
@@ -25,26 +25,33 @@ class App extends HookConsumerWidget {
 
     final locale = ref.watch(i18nProvider);
 
-    return MaterialApp(
-      title: 'Users List',
-      theme: ref.watch(customThemeProvider).getAppTheme(context, isDarkMode),
-      locale: locale,
-      localizationsDelegates: [
-        FlutterI18nDelegate(
-          translationLoader: FileTranslationLoader(
-            basePath: 'lib/i18n/locales',
-          ),
-        ),
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('hu'),
-      ],
+    return CustomTheme(
+      isDarkMode: isDarkMode,
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            title: 'Users List',
+            theme: CustomTheme.of(context).theme,
+            locale: locale,
+            localizationsDelegates: [
+              FlutterI18nDelegate(
+                translationLoader: FileTranslationLoader(
+                  basePath: 'lib/i18n/locales',
+                ),
+              ),
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('hu'),
+            ],
 
-      home: const UsersScreen(),
-      // home: const UsersScreen(),
+            home: const UsersScreen(),
+            // home: const UsersScreen(),
+          );
+        },
+      ),
     );
   }
 }
