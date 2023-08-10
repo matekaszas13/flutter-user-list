@@ -57,15 +57,6 @@ class CustomTheme extends InheritedWidget {
 
   ThemeData get theme => ThemeData(
         scaffoldBackgroundColor: scaffoldBackground,
-        // textTheme: Theme.of(context)
-        //     .textTheme
-        //     .copyWith(
-        //       titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 11),
-        //     )
-        //     .apply(
-        //       bodyColor: isDarkMode ? Colors.white : Colors.black,
-        //       displayColor: Colors.grey,
-        //     ),
         listTileTheme: ListTileThemeData(iconColor: iconColor),
         appBarTheme: AppBarTheme(
             backgroundColor: appBarBackground,
