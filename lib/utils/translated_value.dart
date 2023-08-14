@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
 
 const fallbackLocale = Locale("en");
 
