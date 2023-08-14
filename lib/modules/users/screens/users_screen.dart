@@ -4,9 +4,10 @@ import 'package:flutter_user_list/models/status.dart';
 import 'package:flutter_user_list/models/user.dart';
 import 'package:flutter_user_list/modules/dto/user_status_update_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
-import 'package:flutter_user_list/modules/users/widgets/add_update_user_bottom_sheet.dart';
+import 'package:flutter_user_list/modules/users/widgets/add_user_bottom_sheet.dart';
 import 'package:flutter_user_list/modules/users/widgets/confirmational_dialog.dart';
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
+import 'package:flutter_user_list/modules/users/widgets/update_user_bottom_sheet.dart';
 import 'package:flutter_user_list/modules/users/widgets/user_slidable_card.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -67,11 +68,10 @@ class UsersScreen extends ConsumerWidget {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
-          return AddUserBottomSheet(
+          return UpdateUserBottomSheet(
+            id: id,
             firstName: firstName,
             lastName: lastName,
-            userId: id,
-            isUpdate: isUpdate,
           );
         },
       );
