@@ -4,5 +4,10 @@
   "users": "Users",
   "update_user": "Update User",
   "delete": "Delete",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "fields": {
+    "first_name": "First Name",
+    "last_name": "Last Name"
+  }
 }

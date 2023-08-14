@@ -4,5 +4,10 @@
   "users": "Felhasználók",
   "update_user": "Felhasználó frissítése",
   "delete": "Törlés",
-  "cancel": "Mégse"
+  "cancel": "Mégse",
+  "submit": "Mentés",
+  "fields": {
+    "first_name": "Keresztnév",
+    "last_name": "Vezetéknév"
+  }
 }
