@@ -15,7 +15,7 @@ class UserSlidableCard extends HookConsumerWidget {
       super.key});
 
   final User user;
-  final Function(BuildContext context, String firstName, String lastName, int id, bool isUpdate)
+  final Function({required BuildContext context, required String firstName, required String lastName, required int id})
       openUpdateUserBottomSheet;
   final Function(BuildContext context, int id, String fullName) openDeleteConfirmationalDialog;
   final Function(User user) handleStatusChange;
@@ -30,7 +30,8 @@ class UserSlidableCard extends HookConsumerWidget {
         key: ValueKey(user.id),
         endActionPane: ActionPane(motion: const DrawerMotion(), dragDismissible: false, children: [
           SlidableAction(
-            onPressed: (context) => openUpdateUserBottomSheet(context, user.firstName, user.lastName, user.id, true),
+            onPressed: (context) => openUpdateUserBottomSheet(
+                context: context, firstName: user.firstName, lastName: user.lastName, id: user.id),
             backgroundColor: const Color.fromARGB(100, 92, 70, 156),
             foregroundColor: Colors.white,
             icon: Icons.edit,

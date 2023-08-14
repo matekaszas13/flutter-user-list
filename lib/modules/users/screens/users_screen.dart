@@ -64,7 +64,12 @@ class UsersScreen extends ConsumerWidget {
       );
     }
 
-    void openUpdateUserBottomSheet(BuildContext context, String firstName, String lastName, int id, bool isUpdate) {
+    void openUpdateUserBottomSheet({
+      required BuildContext context,
+      required String firstName,
+      required String lastName,
+      required int id,
+    }) {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
