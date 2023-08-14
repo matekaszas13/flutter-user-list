@@ -40,6 +40,8 @@ mixin FormHandler<T extends FormHandlerState> {
   void emitFields(Map<String, Field> fieldMap);
   FormHandlerState get formHolder;
 
+  F getField<F>(String key) => formHolder.fieldMap[key]! as F;
+
   V getFieldValue<V>(String key) => (formHolder.fieldMap[key]! as Field<V>).draftValue;
 
   void setFieldValue(String key, dynamic value) => emitFields(
