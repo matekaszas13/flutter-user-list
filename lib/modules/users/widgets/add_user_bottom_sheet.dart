@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/models/field/field.dart';
+import 'package:flutter_user_list/modules/dto/add_new_user_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
 import 'package:flutter_user_list/modules/users/widgets/user_form.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_user_list/presentation/utils/form_handler.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
 import 'package:flutter_user_list/utils/translated_value.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../dto/add_new_user_params.dart';
 
 class AddUserBottomSheet extends HookConsumerWidget {
   const AddUserBottomSheet({
