@@ -59,7 +59,7 @@ class UsersScreen extends ConsumerWidget {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
-          return const Scaffold(body: AddUserBottomSheet());
+          return const AddUserBottomSheet();
         },
       );
     }
