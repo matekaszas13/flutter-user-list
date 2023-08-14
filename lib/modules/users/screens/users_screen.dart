@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/models/status.dart';
 import 'package:flutter_user_list/models/user.dart';
 import 'package:flutter_user_list/modules/dto/user_status_update_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
-import 'package:flutter_user_list/modules/users/widgets/add_update_user_bottom_sheet.dart';
+import 'package:flutter_user_list/modules/users/widgets/add_user_bottom_sheet.dart';
 import 'package:flutter_user_list/modules/users/widgets/confirmational_dialog.dart';
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
+import 'package:flutter_user_list/modules/users/widgets/update_user_bottom_sheet.dart';
 import 'package:flutter_user_list/modules/users/widgets/user_slidable_card.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,8 +19,7 @@ class UsersScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<User>> users = ref.watch(getUsersProvider);
-    users.whenData((value) => value
-        .sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt)));
+    users.whenData((value) => value.sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt)));
 
     final isDarkMode = ref.watch(themeModeValueProvider);
 
@@ -42,8 +43,7 @@ class UsersScreen extends ConsumerWidget {
       }
     }
 
-    void openDeleteConfirmationalDialog(
-        BuildContext context, int id, String fullName) {
+    void openDeleteConfirmationalDialog(BuildContext context, int id, String fullName) {
       showDialog(
           context: context,
           builder: (context) {
@@ -59,21 +59,24 @@ class UsersScreen extends ConsumerWidget {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
-          return const Scaffold(body: AddUserBottomSheet());
+          return const AddUserBottomSheet();
         },
       );
     }
 
-    void openUpdateUserBottomSheet(BuildContext context, String firstName,
-        String lastName, int id, bool isUpdate) {
+    void openUpdateUserBottomSheet({
+      required BuildContext context,
+      required String firstName,
+      required String lastName,
+      required int id,
+    }) {
       showBarModalBottomSheet(
         context: context,
         builder: (context) {
-          return AddUserBottomSheet(
+          return UpdateUserBottomSheet(
+            id: id,
             firstName: firstName,
             lastName: lastName,
-            userId: id,
-            isUpdate: isUpdate,
           );
         },
       );
@@ -81,7 +84,7 @@ class UsersScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Users"),
+        title: Text(context.tr('users')),
         actions: [
           IconButton(
             onPressed: openAddUpdateUserBottomSheet,
@@ -107,8 +110,7 @@ class UsersScreen extends ConsumerWidget {
                       return UserSlidableCard(
                           user: user,
                           openUpdateUserBottomSheet: openUpdateUserBottomSheet,
-                          openDeleteConfirmationalDialog:
-                              openDeleteConfirmationalDialog,
+                          openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
                           handleStatusChange: handleStatusChange);
                     }),
               ),

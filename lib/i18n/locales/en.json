@@ -1,0 +1,13 @@
+{
+  "edit": "Edit",
+  "add_user": "Add User",
+  "users": "Users",
+  "update_user": "Update User",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "fields": {
+    "first_name": "First Name",
+    "last_name": "Last Name"
+  }
+}
