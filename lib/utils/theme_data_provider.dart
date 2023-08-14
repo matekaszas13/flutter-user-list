@@ -4,6 +4,8 @@ import 'package:flutter_user_list/presentation/theme/scale.dart';
 import 'package:flutter_user_list/presentation/widgets/input_field/input_field_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final screenInset = EdgeInsets.all(16.hs);
+
 class CustomTheme extends InheritedWidget {
   const CustomTheme({Key? key, required Widget child, required this.isDarkMode}) : super(child: child, key: key);
   final bool isDarkMode;
