@@ -4,7 +4,7 @@ import 'package:flutter_user_list/presentation/widgets/input_field/field_form.da
 import 'package:flutter_user_list/presentation/widgets/input_field/input_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UserForm extends HookConsumerWidget {
+class UserForm extends ConsumerWidget {
   const UserForm({
     required this.formHandler,
     super.key,
