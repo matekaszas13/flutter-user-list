@@ -4,6 +4,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/modules/users/screens/users_screen.dart';
+import 'package:flutter_user_list/presentation/theme/scale.dart';
 import 'package:flutter_user_list/utils/theme_data_provider.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,7 +21,10 @@ class App extends ConsumerWidget {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-
+    Scale.setup(
+      screenSize: MediaQuery.of(context).size,
+      designSize: const Size(360, 640),
+    );
     final isDarkMode = ref.watch(themeModeValueProvider);
 
     final locale = ref.watch(i18nProvider);
@@ -46,9 +50,12 @@ class App extends ConsumerWidget {
               Locale('en'),
               Locale('hu'),
             ],
-
-            home: const UsersScreen(),
-            // home: const UsersScreen(),
+            home: Builder(
+              builder: (context) {
+                ref.watch(i18nProvider.notifier).initializeAppContext(context);
+                return const UsersScreen();
+              },
+            ),
           );
         },
       ),
