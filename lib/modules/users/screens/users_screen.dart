@@ -81,7 +81,6 @@ class UsersScreen extends ConsumerWidget {
       );
     }
 
-    // laoding change
     return Scaffold(
       appBar: AppBar(
         title: Text(context.tr('users')),
@@ -98,25 +97,24 @@ class UsersScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: users.isRefreshing
-          ? const Center(child: CircularProgressIndicator())
-          : users.when(
-              data: (data) => RefreshIndicator(
-                onRefresh: () => ref.refresh(getUsersProvider.future),
-                child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      final User user = data[index];
-                      return UserSlidableCard(
-                          user: user,
-                          openUpdateUserBottomSheet: openUpdateUserBottomSheet,
-                          openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
-                          handleStatusChange: handleStatusChange);
-                    }),
-              ),
-              error: (e, s) => Text(e.toString() + s.toString()),
-              loading: () => const Center(child: CircularProgressIndicator()),
-            ),
+      body: users.when(
+        skipLoadingOnRefresh: false,
+        data: (data) => RefreshIndicator(
+          onRefresh: () => ref.refresh(getUsersProvider.future),
+          child: ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final User user = data[index];
+                return UserSlidableCard(
+                    user: user,
+                    openUpdateUserBottomSheet: openUpdateUserBottomSheet,
+                    openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
+                    handleStatusChange: handleStatusChange);
+              }),
+        ),
+        error: (e, s) => Text(e.toString() + s.toString()),
+        loading: () => const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }

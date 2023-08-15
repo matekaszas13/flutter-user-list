@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final themeModeValueProvider =
-    StateNotifierProvider<ThemeModeValueProvider, bool>((ref) {
+final themeModeValueProvider = StateNotifierProvider<ThemeModeValueProvider, bool>((ref) {
   return ThemeModeValueProvider();
 });
 
