@@ -19,7 +19,6 @@ class UsersScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<User>> users = ref.watch(getUsersProvider);
-    users.whenData((value) => value.sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt)));
 
     final isDarkMode = ref.watch(themeModeValueProvider);
 

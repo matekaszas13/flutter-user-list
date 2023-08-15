@@ -21,14 +21,10 @@ class UsersRepository {
 
   Future<List<User>> getUsers() async {
     final response = await dio.get('/users.json');
-    return response.data
-        .map((user) => User.fromJson(user))
-        .toList()
-        .cast<User>();
+    return User.listFromResponse(response.data);
   }
 
-  Future<Response<dynamic>> updateUserStatusById(
-      UserStatusUpdateParams params) async {
+  Future<Response<dynamic>> updateUserStatusById(UserStatusUpdateParams params) async {
     final response = await dio.put('/users/${params.id}.json', data: {
       'status': params.status.status,
     });
