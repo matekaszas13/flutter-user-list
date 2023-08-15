@@ -49,37 +49,5 @@ class App extends ConsumerWidget {
         },
       ),
     );
-
-    // return CustomTheme(
-    //   isDarkMode: isDarkMode,
-    //   child: Builder(
-    //     builder: (context) {
-    //       return MaterialApp(
-    //         title: 'Users List',
-    //         theme: CustomTheme.of(context).theme,
-    //         locale: locale,
-    //         localizationsDelegates: [
-    //           FlutterI18nDelegate(
-    //             translationLoader: FileTranslationLoader(
-    //               basePath: 'lib/i18n/locales',
-    //             ),
-    //           ),
-    //           GlobalMaterialLocalizations.delegate,
-    //           GlobalCupertinoLocalizations.delegate
-    //         ],
-    //         supportedLocales: const [
-    //           Locale('en'),
-    //           Locale('hu'),
-    //         ],
-    //         home: Builder(
-    //           builder: (context) {
-    //             ref.watch(i18nProvider.notifier).initializeAppContext(context);
-    //             return const UsersScreen();
-    //           },
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }
