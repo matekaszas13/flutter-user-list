@@ -25,8 +25,6 @@ class App extends ConsumerWidget {
     );
     final isDarkMode = ref.watch(themeModeValueProvider);
 
-    // final locale = ref.watch(i18nProvider);
-
     return CustomTheme(
       isDarkMode: isDarkMode,
       child: Builder(
