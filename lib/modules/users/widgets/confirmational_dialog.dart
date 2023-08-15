@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_user_list/i18n/i18n_provider.dart';
+import 'package:flutter_user_list/i18n/i18n.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

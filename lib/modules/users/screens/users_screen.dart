@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_user_list/i18n/i18n_provider.dart';
+import 'package:flutter_user_list/i18n/i18n.dart';
 import 'package:flutter_user_list/models/status.dart';
 import 'package:flutter_user_list/models/user.dart';
 import 'package:flutter_user_list/modules/dto/user_status_update_params.dart';
