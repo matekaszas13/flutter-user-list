@@ -11,6 +11,8 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 
+// select field for status
+
 class App extends ConsumerWidget {
   const App({super.key});
 
@@ -37,10 +39,12 @@ class App extends ConsumerWidget {
                 locale: locale,
                 localizationsDelegates: localizationsDelegates,
                 supportedLocales: supportedLocales,
-                home: Builder(builder: (context) {
-                  initializeAppContext(context);
-                  return const UsersScreen();
-                }),
+                home: Builder(
+                  builder: (context) {
+                    initializeAppContext(context);
+                    return const UsersScreen();
+                  },
+                ),
               );
             },
           );

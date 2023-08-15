@@ -37,14 +37,14 @@ class AddUserBottomSheet extends HookConsumerWidget {
     final isFirstNameEmpty = formHandler.getField<Field>('first_name_field').isEmpty;
     final isLastNameEmpty = formHandler.getField<Field>('last_name_field').isEmpty;
 
-    final mutationIsLoading = ref.watch(addNewUserMutation).isLoading;
+    final addUserMutation = ref.watch(addNewUserMutation);
 
     Future onSubmit() async {
       final params = AddNewUserParams(
         firstName: formHandler.getFieldValue('first_name_field'),
         lastName: formHandler.getFieldValue('last_name_field'),
       );
-      final response = await ref.read(addNewUserMutation).mutate(params);
+      final response = await addUserMutation(params);
 
       response.maybeWhen(
         error: (error, _) {
@@ -68,8 +68,8 @@ class AddUserBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: mutationIsLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
-              child: mutationIsLoading
+              onPressed: addUserMutation.isLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
+              child: addUserMutation.isLoading
                   ? const CircularProgressIndicator()
                   : Text(
                       context.tr('submit'),
