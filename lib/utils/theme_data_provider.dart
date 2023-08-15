@@ -15,6 +15,9 @@ class CustomTheme extends InheritedWidget {
 
   static CustomTheme of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<CustomTheme>()!;
 
+  static const dark = Color(0xFF222831);
+  static const white = Color(0xFFFFFFFF);
+
   static const darkModeDarkBlue = Color.fromARGB(255, 12, 19, 79);
   static const darkModeLightBlue = Color.fromARGB(255, 29, 38, 125);
   static const darkModeDarkPurple = Color.fromARGB(255, 92, 70, 156);
@@ -47,6 +50,8 @@ class CustomTheme extends InheritedWidget {
   TextStyle get button => GoogleFonts.roboto(fontSize: 14.hs, height: 1.35, fontWeight: FontWeight.w500);
   TextStyle get caption => GoogleFonts.roboto(fontSize: 12.hs, height: 1.45, fontWeight: FontWeight.normal);
   TextStyle get overline => GoogleFonts.roboto(fontSize: 12.hs, height: 1.45, fontWeight: FontWeight.w500);
+
+  Color get surface => isDarkMode ? dark : white;
 
   Color get scaffoldBackground => isDarkMode ? darkModeDarkBlue : lightModeLightBlue;
   Color get iconColor => isDarkMode ? Colors.white : Colors.black;
