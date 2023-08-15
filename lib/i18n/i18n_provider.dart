@@ -34,12 +34,3 @@ class I18nProvider extends AutoDisposeNotifier<Locale?> {
     return context?.tr(key) ?? "context is not set in I18nProvider, so cannot retrieve translation for $key";
   }
 }
-
-// extension I18nContextExtension on BuildContext {
-//   String tr(String key, {int? count, Map<String, String>? params}) {
-//     if (count != null) {
-//       return FlutterI18n.plural(this, key, count);
-//     }
-//     return FlutterI18n.translate(this, key, translationParams: params);
-//   }
-// }

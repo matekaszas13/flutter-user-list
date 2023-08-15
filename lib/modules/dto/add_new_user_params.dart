@@ -2,7 +2,7 @@ class AddNewUserParams {
   AddNewUserParams({
     required this.firstName,
     required this.lastName,
-    this.status = 'active',
+    this.status = 'locked',
   });
   final String firstName;
   final String lastName;

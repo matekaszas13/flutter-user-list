@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_user_list/i18n/i18n.dart';
-// import 'package:flutter_user_list/i18n/i18n_provider.dart';
 import 'package:flutter_user_list/models/field/field.dart';
 import 'package:flutter_user_list/modules/dto/add_new_user_params.dart';
 import 'package:flutter_user_list/modules/users/data/users_providers.dart';
@@ -38,19 +37,23 @@ class AddUserBottomSheet extends HookConsumerWidget {
     final isFirstNameEmpty = formHandler.getField<Field>('first_name_field').isEmpty;
     final isLastNameEmpty = formHandler.getField<Field>('last_name_field').isEmpty;
 
-    final mutationIsLoading = ref.watch(addNewUserMutation).isLoading;
+    final addUserMutation = ref.watch(addNewUserMutation);
 
     Future onSubmit() async {
       final params = AddNewUserParams(
         firstName: formHandler.getFieldValue('first_name_field'),
         lastName: formHandler.getFieldValue('last_name_field'),
       );
-      final response = await ref.read(addNewUserMutation).mutate(params);
-      if (response.hasError) {
-        Snackbar.show(context, response.error.toString(), Colors.red);
-      } else {
-        Navigator.of(context).pop();
-      }
+      final response = await addUserMutation(params);
+
+      response.maybeWhen(
+        error: (error, _) {
+          Snackbar.show(context, response.error.toString(), Colors.red);
+        },
+        orElse: () {
+          Navigator.of(context).pop();
+        },
+      );
     }
 
     return Container(
@@ -65,8 +68,8 @@ class AddUserBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: mutationIsLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
-              child: mutationIsLoading
+              onPressed: addUserMutation.isLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
+              child: addUserMutation.isLoading
                   ? const CircularProgressIndicator()
                   : Text(
                       context.tr('submit'),

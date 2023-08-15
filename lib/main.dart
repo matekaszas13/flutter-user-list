@@ -11,6 +11,8 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 
+// select field for status
+
 class App extends ConsumerWidget {
   const App({super.key});
 
@@ -25,8 +27,6 @@ class App extends ConsumerWidget {
     );
     final isDarkMode = ref.watch(themeModeValueProvider);
 
-    // final locale = ref.watch(i18nProvider);
-
     return CustomTheme(
       isDarkMode: isDarkMode,
       child: Builder(
@@ -39,10 +39,12 @@ class App extends ConsumerWidget {
                 locale: locale,
                 localizationsDelegates: localizationsDelegates,
                 supportedLocales: supportedLocales,
-                home: Builder(builder: (context) {
-                  initializeAppContext(context);
-                  return const UsersScreen();
-                }),
+                home: Builder(
+                  builder: (context) {
+                    initializeAppContext(context);
+                    return const UsersScreen();
+                  },
+                ),
               );
             },
           );

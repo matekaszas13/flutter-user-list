@@ -27,4 +27,10 @@ class User {
   get fullName => '$firstName $lastName';
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  static List<User> listFromResponse(List<dynamic> response) {
+    final users = response.map((user) => User.fromJson(user)).toList();
+    users.sort((user1, user2) => user2.createdAt.compareTo(user1.createdAt));
+    return users;
+  }
 }
