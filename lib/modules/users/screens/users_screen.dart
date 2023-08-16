@@ -85,10 +85,10 @@ class UsersScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(context.tr('users')),
         actions: [
-          IconButton(
-            onPressed: openAddUpdateUserBottomSheet,
-            icon: const Icon(Icons.add),
-          ),
+          // IconButton(
+          //   onPressed: openAddUpdateUserBottomSheet,
+          //   icon: const Icon(Icons.add),
+          // ),
           IconButton(
             icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
             onPressed: () {
@@ -96,6 +96,16 @@ class UsersScreen extends ConsumerWidget {
             },
           ),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: openAddUpdateUserBottomSheet,
+        label: Text(
+          context.tr(
+            'add_user',
+          ),
+        ),
+        icon: const Icon(Icons.add),
       ),
       body: users.when(
         skipLoadingOnRefresh: false,
