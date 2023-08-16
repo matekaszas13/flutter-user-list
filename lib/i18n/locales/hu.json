@@ -9,5 +9,8 @@
   "fields": {
     "first_name": "Keresztnév",
     "last_name": "Vezetéknév"
-  }
+  },
+  "status": "Státusz",
+  "active": "Aktív",
+  "locked": "Inaktív"
 }
