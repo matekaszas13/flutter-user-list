@@ -12,5 +12,6 @@
   },
   "status": "Status",
   "active": "Active",
-  "locked": "Locked"
+  "locked": "Locked",
+  "add_users": "Add Users"
 }

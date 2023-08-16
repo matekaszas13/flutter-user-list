@@ -12,5 +12,6 @@
   },
   "status": "Státusz",
   "active": "Aktív",
-  "locked": "Inaktív"
+  "locked": "Inaktív",
+  "add_users": "Új felhasználó hozzáadása"
 }
