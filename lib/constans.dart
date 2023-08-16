@@ -1,0 +1,1 @@
+const statusOptions = ['active', 'locked'];
