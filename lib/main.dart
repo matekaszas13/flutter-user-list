@@ -11,8 +11,6 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 
-// select field for status
-
 class App extends ConsumerWidget {
   const App({super.key});
 
