@@ -13,5 +13,7 @@
   "status": "Status",
   "active": "Active",
   "locked": "Locked",
-  "add_users": "Add Users"
+  "add_users": "Add Users",
+  "hu": "Hungarian",
+  "en": "English"
 }

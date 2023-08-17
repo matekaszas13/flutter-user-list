@@ -13,5 +13,7 @@
   "status": "Státusz",
   "active": "Aktív",
   "locked": "Inaktív",
-  "add_users": "Új felhasználó hozzáadása"
+  "add_users": "Új felhasználó hozzáadása",
+  "hu": "Magyar",
+  "en": "Angol"
 }
