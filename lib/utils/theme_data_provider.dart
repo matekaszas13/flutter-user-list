@@ -58,13 +58,16 @@ class CustomTheme extends InheritedWidget {
   Color get appBarBackground => isDarkMode ? darkModeDarkBlue : lightModeDarkBlue;
   Color get cardBackground => isDarkMode ? darkModeLightBlue : lightModeLightPurple;
   Color get dialogBackground => isDarkMode ? darkModeDarkPurple : lightModeLightBlue;
-  Color get buttonBackground => isDarkMode ? darkModeLightBlue : lightModeDarkBlue;
+  Color get buttonBackground => isDarkMode ? darkModeDarkBlue : lightModeDarkBlue;
   Color get onBackground => isDarkMode ? Colors.white : Colors.black;
   Color get error => isDarkMode ? redLight : redDark;
 
   ThemeData get theme => ThemeData(
         scaffoldBackgroundColor: scaffoldBackground,
-        listTileTheme: ListTileThemeData(iconColor: iconColor),
+        listTileTheme: ListTileThemeData(
+          iconColor: iconColor,
+          textColor: isDarkMode ? Colors.white : Colors.black,
+        ),
         appBarTheme: AppBarTheme(
             backgroundColor: appBarBackground,
             titleTextStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black, fontSize: 20),
