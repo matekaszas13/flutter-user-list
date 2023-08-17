@@ -54,8 +54,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
       },
     );
 
-    final isFirstNameEmpty = formHandler.getField<Field>('first_name_field').isEmpty;
-    final isLastNameEmpty = formHandler.getField<Field>('last_name_field').isEmpty;
+    final isFieldsEmpty = formHandler.formHolder.fields.any((field) => field.isEmpty);
 
     final addUserMutation = ref.watch(addNewUserMutation);
 
@@ -112,7 +111,7 @@ class AddUserBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: addUserMutation.isLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
+              onPressed: addUserMutation.isLoading || isFieldsEmpty ? null : onSubmit,
               child: addUserMutation.isLoading
                   ? const CircularProgressIndicator()
                   : Text(

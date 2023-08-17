@@ -41,8 +41,7 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
       },
     );
 
-    final isFirstNameEmpty = formHandler.getField<Field>('first_name_field').isEmpty;
-    final isLastNameEmpty = formHandler.getField<Field>('last_name_field').isEmpty;
+    final isFieldsEmpty = formHandler.formHolder.fields.any((field) => field.isEmpty);
 
     final mutationIsLoading = ref.watch(updateUserMutation).isLoading;
 
@@ -72,7 +71,7 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: mutationIsLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
+              onPressed: mutationIsLoading || isFieldsEmpty ? null : onSubmit,
               child: mutationIsLoading
                   ? const CircularProgressIndicator()
                   : Text(
