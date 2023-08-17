@@ -7,8 +7,8 @@ final themeModeValueProvider = StateNotifierProvider<ThemeModeValueProvider, boo
 class ThemeModeValueProvider extends StateNotifier<bool> {
   ThemeModeValueProvider() : super(false);
 
-  void setThemeMode() {
-    state = !state;
+  void setThemeMode({bool? themeMode}) {
+    state = themeMode ?? !state;
   }
 
   get getThemeMode => state;
