@@ -52,11 +52,11 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
         lastName: formHandler.getFieldValue('last_name_field'),
       );
       final response = await ref.read(updateUserMutation).mutate(params);
-      if (response.hasError) {
-        Snackbar.show(context, response.error.toString(), Colors.red);
-      } else {
-        Navigator.of(context).pop();
-      }
+
+      response.maybeWhen(
+        error: (error, _) => Snackbar.show(context, response.error.toString(), Colors.red),
+        orElse: () => Navigator.of(context).pop(),
+      );
     }
 
     return Container(
