@@ -151,7 +151,7 @@ class InputField<T> extends HookConsumerWidget {
       return showSelectFieldSheet(
         context,
         title: title,
-        selectedOption: field.draftValue ?? field.initialValue,
+        selectedOption: field.draftValue,
         options: options,
         onSelect: (value) {
           formHandlerOrDefault?.setFieldValue(fieldKey, value);
