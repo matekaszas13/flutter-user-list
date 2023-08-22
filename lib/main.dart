@@ -34,6 +34,7 @@ class App extends HookConsumerWidget {
               .setThemeMode(themeMode: MediaQuery.of(context).platformBrightness == Brightness.dark);
         },
       );
+      return null;
     }, []);
 
     return CustomTheme(
