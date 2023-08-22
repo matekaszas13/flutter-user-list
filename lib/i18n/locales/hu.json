@@ -9,5 +9,11 @@
   "fields": {
     "first_name": "Keresztnév",
     "last_name": "Vezetéknév"
-  }
+  },
+  "status": "Státusz",
+  "active": "Aktív",
+  "locked": "Inaktív",
+  "add_users": "Új felhasználó hozzáadása",
+  "hu": "Magyar",
+  "en": "Angol"
 }

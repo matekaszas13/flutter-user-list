@@ -41,8 +41,7 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
       },
     );
 
-    final isFirstNameEmpty = formHandler.getField<Field>('first_name_field').isEmpty;
-    final isLastNameEmpty = formHandler.getField<Field>('last_name_field').isEmpty;
+    final isFieldsEmpty = formHandler.formHolder.fields.any((field) => field.isEmpty);
 
     final mutationIsLoading = ref.watch(updateUserMutation).isLoading;
 
@@ -53,11 +52,11 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
         lastName: formHandler.getFieldValue('last_name_field'),
       );
       final response = await ref.read(updateUserMutation).mutate(params);
-      if (response.hasError) {
-        Snackbar.show(context, response.error.toString(), Colors.red);
-      } else {
-        Navigator.of(context).pop();
-      }
+
+      response.maybeWhen(
+        error: (error, _) => Snackbar.show(context, response.error.toString(), Colors.red),
+        orElse: () => Navigator.of(context).pop(),
+      );
     }
 
     return Container(
@@ -72,7 +71,7 @@ class UpdateUserBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: mutationIsLoading || (isFirstNameEmpty || isLastNameEmpty) ? null : onSubmit,
+              onPressed: mutationIsLoading || isFieldsEmpty ? null : onSubmit,
               child: mutationIsLoading
                   ? const CircularProgressIndicator()
                   : Text(

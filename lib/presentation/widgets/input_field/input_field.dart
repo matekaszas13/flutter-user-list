@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_user_list/presentation/widgets/input_field/select_field_sheet.dart';
 import 'package:flutter_user_list/utils/theme_data_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_user_list/models/field/field.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_user_list/presentation/widgets/companion_slide_in.dart';
 import 'package:flutter_user_list/presentation/widgets/input_field/default_text_input_action.dart';
 import 'package:flutter_user_list/presentation/widgets/input_field/input_field_theme.dart';
 import 'package:flutter_user_list/utils/translated_value.dart';
+import 'package:flutter_user_list/models/field/fields.dart' as fields;
 
 class InputField<T> extends HookConsumerWidget {
   const InputField({
@@ -142,6 +144,35 @@ class InputField<T> extends HookConsumerWidget {
       }
     }
 
+    void handleSelectFieldPressed(fields.SelectField field) {
+      final title = field.title?.getValue(ref);
+      final options = field.options;
+
+      return showSelectFieldSheet(
+        context,
+        title: title,
+        selectedOption: field.draftValue,
+        options: options,
+        onSelect: (value) {
+          formHandlerOrDefault?.setFieldValue(fieldKey, value);
+          formHandlerOrDefault?.showFieldError(fieldKey);
+          onChanged?.call(value as T);
+        },
+      );
+    }
+
+    void handleFieldPressed() {
+      if (!enabled) {
+        return;
+      }
+      FocusScope.of(context).unfocus();
+
+      fieldType.maybeWhen(
+        select: () => handleSelectFieldPressed(field as fields.SelectField),
+        orElse: () => null,
+      );
+    }
+
     String _getLabel() {
       if (label == null) {
         return '';
@@ -165,6 +196,7 @@ class InputField<T> extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
+                  onTap: handleFieldPressed,
                   child: Focus(
                     onFocusChange: handleFocusChange,
                     child: AbsorbPointer(

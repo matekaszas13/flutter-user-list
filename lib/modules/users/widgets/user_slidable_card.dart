@@ -52,8 +52,9 @@ class UserSlidableCard extends HookConsumerWidget {
             title: Text(user.fullName),
             subtitle: Text(formattedDate),
             trailing: IconButton(
-                onPressed: () => handleStatusChange(user),
-                icon: user.status == Status.active ? const Icon(Icons.lock_open) : const Icon(Icons.lock)),
+              onPressed: () => handleStatusChange(user),
+              icon: user.status == Status.active ? const Icon(Icons.lock_open) : const Icon(Icons.lock),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_list/constans.dart';
 import 'package:flutter_user_list/i18n/i18n.dart';
+import 'package:flutter_user_list/i18n/i18n_provider.dart';
+import 'package:flutter_user_list/models/field/select_field_option.dart';
 import 'package:flutter_user_list/models/status.dart';
 import 'package:flutter_user_list/models/user.dart';
 import 'package:flutter_user_list/modules/dto/user_status_update_params.dart';
@@ -9,7 +12,9 @@ import 'package:flutter_user_list/modules/users/widgets/confirmational_dialog.da
 import 'package:flutter_user_list/modules/users/widgets/snackbar.dart';
 import 'package:flutter_user_list/modules/users/widgets/update_user_bottom_sheet.dart';
 import 'package:flutter_user_list/modules/users/widgets/user_slidable_card.dart';
+import 'package:flutter_user_list/presentation/widgets/input_field/select_field_sheet.dart';
 import 'package:flutter_user_list/utils/theme_mode_value_provider.dart';
+import 'package:flutter_user_list/utils/translated_value.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -21,6 +26,19 @@ class UsersScreen extends ConsumerWidget {
     final AsyncValue<List<User>> users = ref.watch(getUsersProvider);
 
     final isDarkMode = ref.watch(themeModeValueProvider);
+
+    final languageOptions = Map.fromEntries(
+      localeOptions.map(
+        (statusKey) => MapEntry(
+          statusKey,
+          SelectFieldOption(
+            id: statusKey,
+            label: TranslatedValue.key(statusKey),
+            value: statusKey,
+          ),
+        ),
+      ),
+    );
 
     Future handleStatusChange(User user) async {
       final params = UserStatusUpdateParams(
@@ -81,15 +99,28 @@ class UsersScreen extends ConsumerWidget {
       );
     }
 
-    // laoding change
     return Scaffold(
       appBar: AppBar(
         title: Text(context.tr('users')),
         actions: [
-          IconButton(
-            onPressed: openAddUpdateUserBottomSheet,
-            icon: const Icon(Icons.add),
+          TextButton(
+            onPressed: () => showSelectFieldSheet(
+              context,
+              options: languageOptions,
+              selectedOption: languageOptions[ref.watch(i18nProvider.notifier).getCurrentLocale().toString()],
+              onSelect: (value) {
+                ref.read(i18nProvider.notifier).setLocale(Locale(value.id));
+              },
+              title: 'Hello Bello',
+            ),
+            child: Text(
+              ref.watch(i18nProvider.notifier).getCurrentLocale().toString(),
+            ),
           ),
+          // IconButton(
+          //   onPressed: () =>showSelectFieldSheet(),
+          //   icon: const Icon(Icons.add),
+          // ),
           IconButton(
             icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
             onPressed: () {
@@ -98,25 +129,34 @@ class UsersScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: users.isRefreshing
-          ? const Center(child: CircularProgressIndicator())
-          : users.when(
-              data: (data) => RefreshIndicator(
-                onRefresh: () => ref.refresh(getUsersProvider.future),
-                child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      final User user = data[index];
-                      return UserSlidableCard(
-                          user: user,
-                          openUpdateUserBottomSheet: openUpdateUserBottomSheet,
-                          openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
-                          handleStatusChange: handleStatusChange);
-                    }),
-              ),
-              error: (e, s) => Text(e.toString() + s.toString()),
-              loading: () => const Center(child: CircularProgressIndicator()),
-            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: openAddUpdateUserBottomSheet,
+        label: Text(
+          context.tr(
+            'add_user',
+          ),
+        ),
+        icon: const Icon(Icons.add),
+      ),
+      body: users.when(
+        skipLoadingOnRefresh: false,
+        data: (data) => RefreshIndicator(
+          onRefresh: () => ref.refresh(getUsersProvider.future),
+          child: ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final User user = data[index];
+                return UserSlidableCard(
+                    user: user,
+                    openUpdateUserBottomSheet: openUpdateUserBottomSheet,
+                    openDeleteConfirmationalDialog: openDeleteConfirmationalDialog,
+                    handleStatusChange: handleStatusChange);
+              }),
+        ),
+        error: (e, s) => Text(e.toString() + s.toString()),
+        loading: () => const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }

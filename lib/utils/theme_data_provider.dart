@@ -15,6 +15,9 @@ class CustomTheme extends InheritedWidget {
 
   static CustomTheme of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<CustomTheme>()!;
 
+  static const dark = Color(0xFF222831);
+  static const white = Color(0xFFFFFFFF);
+
   static const darkModeDarkBlue = Color.fromARGB(255, 12, 19, 79);
   static const darkModeLightBlue = Color.fromARGB(255, 29, 38, 125);
   static const darkModeDarkPurple = Color.fromARGB(255, 92, 70, 156);
@@ -48,18 +51,23 @@ class CustomTheme extends InheritedWidget {
   TextStyle get caption => GoogleFonts.roboto(fontSize: 12.hs, height: 1.45, fontWeight: FontWeight.normal);
   TextStyle get overline => GoogleFonts.roboto(fontSize: 12.hs, height: 1.45, fontWeight: FontWeight.w500);
 
+  Color get surface => isDarkMode ? dark : white;
+
   Color get scaffoldBackground => isDarkMode ? darkModeDarkBlue : lightModeLightBlue;
   Color get iconColor => isDarkMode ? Colors.white : Colors.black;
   Color get appBarBackground => isDarkMode ? darkModeDarkBlue : lightModeDarkBlue;
   Color get cardBackground => isDarkMode ? darkModeLightBlue : lightModeLightPurple;
   Color get dialogBackground => isDarkMode ? darkModeDarkPurple : lightModeLightBlue;
-  Color get buttonBackground => isDarkMode ? darkModeLightBlue : lightModeDarkBlue;
+  Color get buttonBackground => isDarkMode ? darkModeDarkBlue : lightModeDarkBlue;
   Color get onBackground => isDarkMode ? Colors.white : Colors.black;
   Color get error => isDarkMode ? redLight : redDark;
 
   ThemeData get theme => ThemeData(
         scaffoldBackgroundColor: scaffoldBackground,
-        listTileTheme: ListTileThemeData(iconColor: iconColor),
+        listTileTheme: ListTileThemeData(
+          iconColor: iconColor,
+          textColor: isDarkMode ? Colors.white : Colors.black,
+        ),
         appBarTheme: AppBarTheme(
             backgroundColor: appBarBackground,
             titleTextStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black, fontSize: 20),
